@@ -1,5 +1,5 @@
 locals {
-  roles = merge(var.database_type == "postgresql" ? var.roles_postgresql : [], var.additional_roles)
+  roles = merge(var.database_type == "postgresql" ? var.roles_postgresql : {}, var.additional_roles)
 }
 
 resource "vault_mount" "database" {
