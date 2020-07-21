@@ -17,8 +17,7 @@ resource "vault_database_secret_backend_connection" "connection_postgresql" {
   ]
 
   postgresql {
-    # FUCK connection_url value is present in plan/apply output!
-    connection_url = "postgres://${var.admin_username}:${var.admin_password}@${var.address}:5432/${var.name}"
+    connection_url = "postgres://${var.admin_username}:${var.admin_password}@${var.address}:${var.db_port}/${var.db_name}"
   }
 }
 

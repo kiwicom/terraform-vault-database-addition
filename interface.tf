@@ -2,6 +2,15 @@ variable "name" {
   type = string
 }
 
+variable "db_name" {
+  type = string
+}
+
+variable "db_port" {
+  type    = string
+  default = "5432"
+}
+
 variable "base_path" {
   type = string
 }
