@@ -1,5 +1,6 @@
 locals {
-  roles = merge(var.database_type == "postgresql" ? var.roles_postgresql : {}, var.additional_roles)
+  roles   = merge(var.database_type == "postgresql" ? var.roles_postgresql : {}, var.additional_roles)
+  db_name = length(var.db_name) > 0 ? var.db_name : var.name
 }
 
 resource "vault_mount" "database" {
@@ -17,7 +18,7 @@ resource "vault_database_secret_backend_connection" "connection_postgresql" {
   ]
 
   postgresql {
-    connection_url = "postgres://${var.admin_username}:${var.admin_password}@${var.address}:${var.db_port}/${var.db_name}"
+    connection_url = "postgres://${var.admin_username}:${var.admin_password}@${var.address}:${var.db_port}/${local.db_name}"
   }
 }
 
